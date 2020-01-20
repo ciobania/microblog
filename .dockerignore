@@ -1,0 +1,43 @@
+# ignore all markdown files (md) beside all README*.md other than README-secret.md
+.*
+*.md
+!README.md
+!README*.md
+README-secret.md
+docs
+mkdocs.yml
+docker-compose.yml
+test*
+
+# ignore all *.class files in all folders, including build root
+**/*.class
+
+# ignore __pycache__
+*pycache*
+.git
+.cache
+
+# OSX
+.DS_Store
+
+# Other stuff
+*.tar.gz
+**/*.tar.gz
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+
+
+# local custom files to ignore
+nas_*
+sej_*
+configs
+logs/*
+final_release/*
+support_*
+generate_*
+
+

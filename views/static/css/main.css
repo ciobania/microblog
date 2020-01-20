@@ -1,0 +1,184 @@
+body {
+    align-items: center;
+    font-family: sans-serif;
+}
+
+table {
+    border-collapse: collapse;
+    /*display: block;*/
+    /*height: 500px;*/
+    /*overflow-y: scroll;*/
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+
+tr {
+    text-align: justify-all;
+    height: 30px;
+}
+
+td {
+    text-align: justify-all;
+    padding: 5px;
+}
+
+.form {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.body-center {
+  margin: auto;
+  width: 75%;
+  /*border: 2px solid grey;*/
+  padding: 20px;
+}
+
+#content {
+    width: 70%;
+}
+
+label{
+    display: inline-block;
+    float: left;
+    clear: left;
+    width: 250px;
+    text-align: right;
+}
+
+input#submit {
+    display: flex;
+    float: right;
+    padding: 20px;
+}
+
+.hidden {
+  display: none !important;
+  visibility: hidden !important; /* Prevent element from affecting the box model, e.g. whitespace between visible, surrounding elements  */
+}
+
+select, option {
+  width: 100px;
+}
+
+.progress-bar {
+    display: inline-block;
+    position: relative;
+    width: 500px;
+    height: 1.2em;
+    background-color: lightgrey;
+    border-radius: .5em;
+    color: white;
+}
+
+.progress-bar::before {
+    content: attr(data-label);
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    left: .2em;
+    top: .2em;
+    bottom: .2em;
+    height: .6em;
+    width: calc(var(--width, 0) * 1%);
+    min-width: .1em;
+    max-width: calc(100% - 1em);
+    background-color: #069;
+    border-radius: .5em;
+    padding-top: .4em;
+    padding-bottom: .2em;
+    padding-left: .5em;
+    padding-right: 1em;
+}
+
+/*.progress::after {*/
+/*    content: attr(data-label);*/
+/*}*/
+
+.diffed-table table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.diffed-table tbody th, td {
+    border:1px solid #ccc;
+  	padding:5px;
+    text-align: justify-all;
+}
+
+.diffed-table thead th {
+    text-align: justify-all;
+    background: darkgray;
+}
+
+.diffed-table tbody tr:nth-child(odd) {
+    background-color: lightgrey;
+}
+
+.diffed-table tbody tr:hover {
+    background-color: #00a5c9;
+}
+
+/* heading styles*/
+/*h4 {*/
+/*   width: 60%;*/
+/*   text-align: left;*/
+/*   border-bottom: 1px solid #000;*/
+/*   line-height: 0.1em;*/
+/*   margin: 15px 0 20px;*/
+/*}*/
+
+/*h4 span {*/
+/*    background:#fff;*/
+/*    padding:0 10px;*/
+/*}*/
+
+h4 {
+    margin: 0;
+    text-align: left;
+    position: relative;
+    max-width: 300px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+h4:before {
+    content: "";
+    display: inline-block;
+    background: #000;
+    width: 20px;
+    height: 1px;
+    position: absolute;
+    vertical-align: middle;
+    top: 50%;
+    left: -25px;
+}
+
+h4:after {
+    content: "";
+    display: inline-block;
+    background: #000;
+    width: 120px;
+    height: 1px;
+    position: absolute;
+    vertical-align: middle;
+    top: 50%;
+    right: 85px;
+}
+
+h4 span {
+    background: #FFFFFF;
+}
+
+/*h4:before {*/
+/*    right: .3em;*/
+/*    margin-left: 5%;*/
+/*}*/
+
+/*h4:after {*/
+/*    left: .3em;*/
+/*    margin-right: 80%;*/
+/*}*/
