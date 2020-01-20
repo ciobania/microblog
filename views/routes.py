@@ -1,7 +1,8 @@
 # -*- coding: UTF-8 -*-
 # author: 'ACIOBANI'
 from flask import render_template
-from app import app
+
+from views import app
 
 @app.route('/')
 @app.route('/index')
