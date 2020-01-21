@@ -2,7 +2,7 @@
 # author: 'ACIOBANI'
 from datetime import datetime
 
-from microblog.views import db
+from app import db
 from sqlalchemy.dialects.postgresql import UUID
 
 

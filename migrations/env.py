@@ -18,7 +18,7 @@ fileConfig(config.config_file_name)
 logger = logging.getLogger('alembic.env')
 
 # add your model's MetaData object here
-from microblog.views.models import User, Post
+from app.models import User, Post
 
 # for 'autogenerate' support
 # from myapp import mymodel
