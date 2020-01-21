@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+<tr>
+    <td><img src="{{ post.author.avatar(36) }}" alt="post_gravatar"></td>
+    <td>
+        <div>
+            <p>
+                {{ post.author.user_name }} says: {{ post.title }}
+            </p>
+        </div>
+    </td>
+</tr>
