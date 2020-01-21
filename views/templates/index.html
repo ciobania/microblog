@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {% if title %}
+        {{ title }} - Microblog
+    {% else  %}
+        Welcome to Microblog!
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+        {% if error is defined %}
+            <div class="error-msg">
+              <i class="fa fa-times-circle close_btn" onclick="this.parentElement.style.display='none';"></i>
+              <span>{{ error|safe }}</span>
+            </div>
+        {% endif %}
+        <div class="content">
+            <h3>Hello, {{ user.username }}!</h3>
+        </div>
+    {% for post in posts %}
+    <div><p>{{ post.author.name }} says: {{ post.body }}</p></div>
+    {% endfor %}
+{% endblock %}
