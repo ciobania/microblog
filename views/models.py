@@ -39,7 +39,7 @@ class Post(BaseModel):
 
     body = db.Column(db.String(1024))
     title = db.Column(db.String(64))
-    user_id = db.Column(UUID(as_uuid=True), db.ForeignKey('user.id'))
+    user_id = db.Column(UUID(as_uuid=True), db.ForeignKey('users.id'))
 
 
     def __repr__(self):
