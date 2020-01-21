@@ -1,10 +1,12 @@
 # -*- coding: UTF-8 -*-
 # author: 'ACIOBANI'
-from flask import render_template, flash, redirect, url_for
+from datetime import datetime
+
+from flask import render_template, flash, redirect, url_for, request
 from flask_login import current_user, login_user, logout_user, login_required
 
 from app import app, db
-from app.forms import LoginForm, RegistrationForm
+from app.forms import LoginForm, RegistrationForm, EditProfileForm
 from app.models import User, Post
 from app.routes_utils import get_next_page_or
 
@@ -80,3 +82,28 @@ def user_profile(user_name):
     return render_template('user.html',
                            user=user,
                            posts=posts)
+
+
+@app.route('edit_profile/', methods=['GET', 'POST'])
+@login_required
+def edit_profile():
+    edit_profile_form = EditProfileForm()
+    if edit_profile_form.validate_on_submit():
+        current_user.user_name = edit_profile_form.user_name
+        current_user.about_me = edit_profile_form.about_me
+        db.session.commit()
+        flash('Your changes have been saved.')
+        return redirect(url_for('edit_profile'))
+    elif request.method == 'GET':
+        edit_profile_form.user_name.data = current_user.user_name
+        edit_profile_form.about_me.data = current_user.about_me
+        return render_template('edit_profile.html',
+                               title='Edit Profile',
+                               form=edit_profile_form)
+
+
+@app.before_request
+def before_request():
+    if current_user.is_authenticated:
+        current_user.last_seen = datetime.utcnow()
+        db.session.commit()
