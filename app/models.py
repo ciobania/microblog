@@ -1,7 +1,8 @@
 # -*- coding: UTF-8 -*-
 # author: 'ACIOBANI'
-import uuid
 from datetime import datetime
+from hashlib import md5
+import uuid
 
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -34,6 +35,8 @@ class User(UserMixin, BaseModel):
     email = db.Column(db.String(120))
     password_hash = db.Column(db.String(128))
     posts = db.relationship('Post', backref='author', lazy='dynamic')
+    about_me = db.Column(db.String(140))
+    last_seen = db.Column(db.DateTime, default=datetime.utcnow)
 
     def __repr__(self):
         return f'<User: {self.user_name}>'
@@ -43,6 +46,11 @@ class User(UserMixin, BaseModel):
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
+
+    def avatar(self, size):
+        digest = md5(self.email.lower().encode('utf-8')).hexdigest()
+        gravatar_url = 'https://www.gravatar.com/avatar/{}?d=identicon&s={}'
+        return gravatar_url.format(digest, size)
 
 
 @login_manager.user_loader

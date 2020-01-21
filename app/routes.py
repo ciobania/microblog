@@ -69,3 +69,14 @@ def register():
     return render_template('registration.html',
                            title='Register',
                            form=register_form)
+
+
+@app.route('/profile/<user_name>')
+@login_required
+def user_profile(user_name):
+    user = User.query.filter_by(user_name=user_name).first_or_404()
+    posts = Post.query.filter_by(author=current_user or user).all()
+
+    return render_template('user.html',
+                           user=user,
+                           posts=posts)
