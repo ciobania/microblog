@@ -27,6 +27,15 @@ class BaseModel(db.Model):
                            onupdate=datetime.utcnow)
 
 
+followers = db.Table('followers',
+                     db.Column('follower_id',
+                               UUID(as_uuid=True),
+                               db.ForeignKey('users.id')),
+                     db.Column('followed_id',
+                               UUID(as_uuid=True),
+                               db.ForeignKey('users.id')))
+
+
 class User(UserMixin, BaseModel):
     __tablename__ = 'users'
 
@@ -37,9 +46,16 @@ class User(UserMixin, BaseModel):
                       index=True,
                       unique=True)
     password_hash = db.Column(db.String(128))
-    posts = db.relationship('Post', backref='author', lazy='dynamic')
     about_me = db.Column(db.String(140))
     last_seen = db.Column(db.DateTime, default=datetime.utcnow)
+    posts = db.relationship('Post', backref='author', lazy='dynamic')
+    followed = db.relationship('User',
+                               secondary=followers,
+                               primaryjoin=(followers.c.follower_id == id),
+                               secondaryjoin=(followers.c.followed_id == id),
+                               backref=db.backref('followers',
+                                                  lazy='dynamic'),
+                               lazy='dynamic')
 
     def __repr__(self):
         return f'<User: {self.user_name}>'
@@ -72,3 +88,10 @@ class Post(BaseModel):
 
     def __repr__(self):
         return f'<Post: {self.title}>'
+
+# ToDo: review this path of self-referential mapping
+# class Followers(db.Model):
+#     __table__name = 'followers'
+#
+#     followed_id = db.Column(UUID(as_uuid=True), db.ForeignKey('users.id'))
+#     follower_id = db.Column(UUID(as_uuid=True), db.ForeignKey('users.id'))
