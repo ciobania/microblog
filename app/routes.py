@@ -89,8 +89,8 @@ def user_profile(user_name):
 def edit_profile():
     edit_profile_form = EditProfileForm()
     if edit_profile_form.validate_on_submit():
-        current_user.user_name = edit_profile_form.user_name
-        current_user.about_me = edit_profile_form.about_me
+        current_user.user_name = edit_profile_form.user_name.data
+        current_user.about_me = edit_profile_form.about_me.data
         db.session.commit()
         flash('Your changes have been saved.')
         return redirect(url_for('edit_profile'))
