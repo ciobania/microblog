@@ -84,7 +84,7 @@ def user_profile(user_name):
                            posts=posts)
 
 
-@app.route('edit_profile/', methods=['GET', 'POST'])
+@app.route('/edit_profile', methods=['GET', 'POST'])
 @login_required
 def edit_profile():
     edit_profile_form = EditProfileForm()
