@@ -18,6 +18,8 @@ fileConfig(config.config_file_name)
 logger = logging.getLogger('alembic.env')
 
 # add your model's MetaData object here
+from microblog.views.models import User, Post
+
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
@@ -82,7 +84,8 @@ def run_migrations_online():
         context.configure(
             connection=connection,
             target_metadata=target_metadata,
-            process_revision_directives=process_revision_directives,
+            # process_revision_directives=process_revision_directives,
+            compare_type=True,
             **current_app.extensions['migrate'].configure_args
         )
 
