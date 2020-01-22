@@ -97,23 +97,29 @@ def edit_profile():
     elif request.method == 'GET':
         edit_profile_form.user_name.data = current_user.user_name
         edit_profile_form.about_me.data = current_user.about_me
-        return render_template('edit_profile.html',
-                               title='Edit Profile',
-                               form=edit_profile_form)
+    return render_template('edit_profile.html',
+                           title='Edit Profile',
+                           form=edit_profile_form)
 
 
 @app.route('/follow/<user_name>')
 @login_required
 def follow_user(user_name):
-    return edit_follower_for_user(action='follow',
-                                  user_name=user_name)
+    params = {'action': 'follow',
+              'user_name': user_name,
+              'current_user': current_user}
+    redirect_url_for = edit_follower_for_user(**params)
+    return render_template(redirect_url_for)
 
 
 @app.route('/unfollow/<user_name>')
 @login_required
 def unfollow_user(user_name):
-    return edit_follower_for_user(action='unfollow',
-                                  user_name=user_name)
+    params = {'action': 'unfollow',
+              user_name: user_name,
+              current_user: current_user}
+    redirect_url_for = edit_follower_for_user(**params)
+    return render_template(redirect_url_for)
 
 
 @app.before_request

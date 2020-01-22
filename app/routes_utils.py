@@ -1,7 +1,6 @@
 # -*- coding: UTF-8 -*-
 # author: 'ACIOBANI'
-from flask import request, url_for, flash, redirect
-from flask_login import current_user
+from flask import request, url_for, flash
 from werkzeug.urls import url_parse
 
 from app import db
@@ -16,15 +15,15 @@ def get_next_page_or(default):
     return url_for(default)
 
 
-def edit_follower_for_user(action, user_name):
+def edit_follower_for_user(action, user_name, current_user):
     user = User.query.filter_by(user_name=user_name).first()
     if not user:
         flash(f"User '{user_name}' not found!")
-        return redirect(url_for('index'))
+        return url_for('index')
     if user == current_user:
-        flash('You cannot {action} yourself!')
-        return redirect(url_for('user', user_name=user_name))
+        flash(f'You cannot {action} yourself!')
+        return url_for('user', user_name=user_name)
     getattr(current_user, action)(user)
     db.session.commit()
     flash(f'You are following {user_name}!')
-    return redirect(url_for('user', user_name=user_name))
+    return url_for('user', user_name=user_name)
