@@ -1,13 +1,17 @@
-<tr>
-    <td><img src="{{ post.author.avatar(36) }}" alt="post_gravatar"></td>
-    <td>
-        <div>
-            <p>
-                <a href="{{ url_for('user_profile', user_name=post.author.user_name) }}">
-                    {{ post.author.user_name }}
-                </a>
-                says: {{ post.title }}
-            </p>
-        </div>
-    </td>
-</tr>
+<table class="table table-hover">
+    <tr>
+        <td width="70px">
+            <a href="{{ url_for('user_profile', user_name=post.author.user_name) }}">
+                <img src="{{ post.author.avatar(70) }}"  alt="{{ post.author.user_name }}"/>
+            </a>
+        </td>
+        <td>
+            <a href="{{ url_for('user_profile', user_name=post.author.user_name) }}">
+                {{ post.author.user_name }}
+            </a>
+            says:
+            <br>
+            {{ post.body }}
+        </td>
+    </tr>
+</table>
