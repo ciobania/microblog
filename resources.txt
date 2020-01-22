@@ -1,0 +1,10 @@
+# error handling and sendimg errors via email:
+https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-vii-error-handling
+https://stackoverflow.com/questions/48080591/sqlalchemy-relationship-primaryjoin-with-self-and-parent-columns
+https://stackoverflow.com/questions/54888558/syntax-for-late-binding-many-to-many-self-referential-relationship
+https://stackoverflow.com/questions/34992258/sqlalchemy-many-to-many-without-foreign-key
+https://stackoverflow.com/questions/30607680/self-referential-many-to-many-flask-sqlalchemy
+https://www.reddit.com/r/flask/comments/2n3mrh/af_manytomany_relationship_on_same_object/
+
+# db related event signaling - maybe useful for db admin errors, available in admin mode?
+https://flask-sqlalchemy.palletsprojects.com/en/master/signals/
