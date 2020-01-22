@@ -6,22 +6,29 @@ from flask import render_template, flash, redirect, url_for, request
 from flask_login import current_user, login_user, logout_user, login_required
 
 from app import app, db
-from app.forms import LoginForm, RegistrationForm, EditProfileForm
+from app.forms import LoginForm, RegistrationForm, EditProfileForm, PostForm
 from app.models import User, Post
 from app.routes_utils import get_next_page_or, edit_follower_for_user
 
 
-@app.route('/')
-@app.route('/index')
+@app.route('/', methods=['GET', 'POST'])
+@app.route('/index', methods=['GET', 'POST'])
 @login_required
 def index():
     """
     App Homepage route
     """
-    print('in index')
-    posts = Post.query.filter_by(author=current_user).all()
+    post_form = PostForm()
+    if post_form.validate_on_submit():
+        new_post = Post(body=post_form.post.data, author=current_user)
+        db.session.add(new_post)
+        db.session.commit()
+        flash('Your post is now live!')
+        return redirect(url_for('index'))
+    posts = current_user.followed_posts().all()
     return render_template('index.html',
                            title='Home',
+                           form=post_form,
                            posts=posts)
 
 
@@ -120,6 +127,13 @@ def unfollow_user(user_name):
               current_user: current_user}
     redirect_url_for = edit_follower_for_user(**params)
     return render_template(redirect_url_for)
+
+
+@app.route('/explore')
+@login_required
+def explore():
+    posts = Post.query.order_by(Post.created_at.desc()).all()
+    return render_template('index.html', title='Explore', posts=posts)
 
 
 @app.before_request

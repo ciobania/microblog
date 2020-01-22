@@ -3,7 +3,10 @@
     <td>
         <div>
             <p>
-                {{ post.author.user_name }} says: {{ post.title }}
+                <a href="{{ url_for('user_profile', user_name=post.author.user_name) }}">
+                    {{ post.author.user_name }}
+                </a>
+                says: {{ post.title }}
             </p>
         </div>
     </td>
