@@ -45,4 +45,10 @@
         {% include '_post.html' %}
     {%  endfor %}
     </table>
+    {% if prev_page %}
+        <span><a href="{{ prev_page }}">Newer posts</a></span>
+    {% endif %}
+    {% if next_page %}
+        <span><a href="{{ next_page }}">Older posts</a></span>
+    {% endif %}
 {% endblock %}

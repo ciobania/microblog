@@ -12,6 +12,7 @@ class Config:
                  'can-guess-it-4-life'
     SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    POSTS_PER_PAGE = 3
 
 
 class ProductionConfig(Config):
