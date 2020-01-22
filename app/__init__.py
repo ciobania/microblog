@@ -2,7 +2,6 @@
 # author: 'ACIOBANI'
 import logging
 import os
-from datetime import datetime
 from logging.handlers import RotatingFileHandler
 
 from flask import Flask
