@@ -8,7 +8,7 @@ from flask_login import current_user, login_user, logout_user, login_required
 from app import app, db
 from app.forms import LoginForm, RegistrationForm, EditProfileForm
 from app.models import User, Post
-from app.routes_utils import get_next_page_or
+from app.routes_utils import get_next_page_or, edit_follower_for_user
 
 
 @app.route('/')
@@ -100,6 +100,20 @@ def edit_profile():
         return render_template('edit_profile.html',
                                title='Edit Profile',
                                form=edit_profile_form)
+
+
+@app.route('/follow/<user_name>')
+@login_required
+def follow_user(user_name):
+    return edit_follower_for_user(action='follow',
+                                  user_name=user_name)
+
+
+@app.route('/unfollow/<user_name>')
+@login_required
+def unfollow_user(user_name):
+    return edit_follower_for_user(action='unfollow',
+                                  user_name=user_name)
 
 
 @app.before_request

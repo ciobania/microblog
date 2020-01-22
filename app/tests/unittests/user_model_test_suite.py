@@ -64,7 +64,7 @@ class UserModelTestSuite(unittest.TestCase):
         self.assertEqual(u2.followers.count(), 1)
         self.assertEqual(u2.followers.first().user_name, 'john13')
 
-        u1.un_follow(u2)
+        u1.unfollow(u2)
         db.session.commit()
         self.assertFalse(u1.is_following(u2))
         self.assertEqual(u1.followed.count(), 0)
